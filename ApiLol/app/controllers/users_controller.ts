@@ -17,7 +17,7 @@ export default class UsersController {
     
     async show({params, response}: HttpContext){
         try{
-            const user = await User.findByOrFail('id', params.id)
+            const user = await User.findBy('iafajfj', params.id)
             return user
         }
         catch (Error){
@@ -26,7 +26,7 @@ export default class UsersController {
    }
    async update({params, request, response}: HttpContext){
         try{
-            const user = await User.findByOrFail('id', params.id)
+            const user = await User.findBy('id', params.id)
             const {name,email, password } = await request.validateUsing(createUserValidator)
             user.merge({name, email, password})
             await user.save()
