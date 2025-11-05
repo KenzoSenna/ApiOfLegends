@@ -14,7 +14,7 @@ export default class UsersController {
     return user
 
     }
-
+    
     async show({params, response}: HttpContext){
         try{
             const user = await User.findByOrFail('id', params.id)
