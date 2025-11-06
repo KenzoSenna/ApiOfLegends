@@ -17,7 +17,10 @@ export default class UsersController {
     
     async show({params, response}: HttpContext){
         try{
-            const user = await User.findByOrFail('id', params.id)
+            const user = await User.findBy('id', params.id)
+            if (!user){
+                throw new Error("This user doesn't exists!")
+            }
             return user
         }
         catch (Error){
@@ -26,7 +29,10 @@ export default class UsersController {
    }
    async update({params, request, response}: HttpContext){
         try{
-            const user = await User.findByOrFail('id', params.id)
+            const user = await User.findBy('id', params.id)
+            if (!user){
+                throw new Error("This user doesn't exists!")
+            }
             const {name,email, password } = await request.validateUsing(createUserValidator)
             user.merge({name, email, password})
             await user.save()
@@ -38,7 +44,10 @@ export default class UsersController {
     }
     async destroy({params, response}: HttpContext){
         try{
-            const user = await User.findByOrFail('id', params.id)
+            const user = await User.findBy('id', params.id)
+            if (!user){
+                throw new Error("This user doesn't exists!")
+            }
             await user.delete()
             return response.status(203)
         }
