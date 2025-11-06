@@ -21,6 +21,9 @@ export default class CharactersController {
     async show({params, response}: HttpContext){
         try{
             const character = await Character.findBy('id', params.id)
+            if (!character){
+                throw new Error("This Character doesn't exists!")
+            }
             return character
         }
         catch (Error){
@@ -29,11 +32,34 @@ export default class CharactersController {
         }
     }
 
-    async update(){
-
+    async update({params, request, response}: HttpContext){
+        try{
+            const character = await Character.findBy('id', params.id)
+            if (!character){
+                throw new Error("This Character doesn't exists!")
+            }
+            const {name, region, resource, year, type} = await request.validateUsing(createCharacterValidator)
+            character.merge({name, region, resource, year, type})
+            await character.save()
+            return character
+        }
+        catch (Error){
+            return response.status(200).json({Error: 'Update has failed because we did not found the Character'})
+        }
     }
 
-    async destroy(){
+    async destroy({params, response}: HttpContext){
+        try{
+            const character = await Character.findBy('id', params.id)
+            if(!character){
+                throw new Error("Character doesn't exists")
+            }
+            await character.delete()
+            return response.status(203)
+        }
+        catch(Error){
+            return response.status(400).json({Error: 'Character not founded'})
+        }
 
     }
 }
