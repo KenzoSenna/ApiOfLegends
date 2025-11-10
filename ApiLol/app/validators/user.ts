@@ -9,8 +9,8 @@ export const createUserValidator = vine.compile(
             return !match
            } 
         ),
-        password: vine.string().minLength(6),
-        winStreak: vine.number()
+        password: vine.string().minLength(6)
+
     })
 
 )
@@ -19,11 +19,5 @@ export const updateUserValidator = vine.compile(
     vine.object({
         name: vine.string().trim(),
         password: vine.string().minLength(6)
-    })
-)
-
-export const updateWinstreak = vine.compile(
-    vine.object({
-        winStreak: vine.number()
     })
 )

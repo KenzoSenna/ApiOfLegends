@@ -9,8 +9,8 @@ export default class UsersController {
     }
 
     async store({request}: HttpContext){
-    const {name, email, password, winStreak} = await request.validateUsing(createUserValidator)
-    const user = await User.create({ name, email, password, winStreak })
+    const {name, email, password} = await request.validateUsing(createUserValidator)
+    const user = await User.create({ name, email, password})
     return user
 
     }
