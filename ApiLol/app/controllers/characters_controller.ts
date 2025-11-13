@@ -13,8 +13,8 @@ export default class CharactersController {
     }
 
     async store({request}: HttpContext){
-        const {name, region, resource, year, type} = await request.validateUsing(createCharacterValidator)
-        const character = await Character.create({name, region, resource, year, type})
+        const {image_url, name, region, resource, year, type} = await request.validateUsing(createCharacterValidator)
+        const character = await Character.create({image_url, name, region, resource, year, type})
         return character
     }
 

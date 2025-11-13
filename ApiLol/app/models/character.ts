@@ -6,6 +6,9 @@ export default class Character extends BaseModel {
   declare id: number
 
   @column()
+  declare image_url: string
+
+  @column()
   declare name: string
 
   @column()
