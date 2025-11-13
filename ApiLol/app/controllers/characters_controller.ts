@@ -13,8 +13,8 @@ export default class CharactersController {
     }
 
     async store({request}: HttpContext){
-        const {name, region, resource, year, type} = await request.validateUsing(createCharacterValidator)
-        const character = await Character.create({name, region, resource, year, type})
+        const {image_url, name, region, resource, year, type} = await request.validateUsing(createCharacterValidator)
+        const character = await Character.create({image_url, name, region, resource, year, type})
         return character
     }
 
@@ -28,7 +28,7 @@ export default class CharactersController {
         }
         catch (Error){
             return response.status(400).json({Error:
-                'O joão é tão, mas tão feio, que a Api falhou.'})
+                Error.message})
         }
     }
 
@@ -44,7 +44,7 @@ export default class CharactersController {
             return character
         }
         catch (Error){
-            return response.status(200).json({Error: 'Update has failed because we did not found the Character'})
+            return response.status(200).json({Error: Error.message})
         }
     }
 
@@ -58,8 +58,7 @@ export default class CharactersController {
             return response.status(203)
         }
         catch(Error){
-            return response.status(400).json({Error: 'Character not founded'})
+            return response.status(400).json({Error: Error.message})
         }
-
     }
 }

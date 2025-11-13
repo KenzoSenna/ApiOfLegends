@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loldle - Guess the Champion</title>
+    <link rel="stylesheet" href="../views/css/style.css">
+        
+</head>
+<body>
+    <div class="container">
+        <h1>Loldle</h1>
+        <input type="text" id="guessInput" placeholder="Guess the champion..." autocomplete="off">
+        <button onclick="checkGuess()">Submit</button>
+        <div id="cards"></div>
+        <div id="result"></div>
+        <div id="hints" class="hints"></div>
+    </div>
+
+    <script src="../views/script/injector.js"></script>
+    <!-- <script>
+        fetchData()
+        async function fetchData() {
+            try{
+                const response = await fetch("http://localhost:63546/characters/")
+                if(!response.ok){
+                    throw new error("Couldn't fetch data")
+
+                }
+                const data = await response.json()
+                console.log(data)
+            }
+            catch(Error){
+                console.error(Error)
+            }
+            
+
+
+        }
+
+
+
+    </script> -->
+</body>
+</html>

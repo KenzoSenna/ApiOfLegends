@@ -12,19 +12,18 @@ export default class UsersController {
     const {name, email, password} = await request.validateUsing(createUserValidator)
     const user = await User.create({ name, email, password})
     return user
-
     }
     
     async show({params, response}: HttpContext){
         try{
             const user = await User.findBy('id', params.id)
             if (!user){
-                throw new Error("This user doesn't exists!")
+                throw new Error("User not found!")
             }
             return user
         }
         catch (Error){
-            return response.status(400).json({Error: 'User not found'})
+            return response.status(400).json({Error: Error.message})
         }
    }
    async update({params, request, response}: HttpContext){
@@ -39,20 +38,20 @@ export default class UsersController {
             return user
         }
         catch (Error){
-            return response.status(400).json({Error: 'User not founded in system'})
+            return response.status(400).json({Error: Error.message})
         }    
     }
     async destroy({params, response}: HttpContext){
         try{
             const user = await User.findBy('id', params.id)
             if (!user){
-                throw new Error("This user doesn't exists!")
+                throw new Error("User not found")
             }
             await user.delete()
             return response.status(203)
         }
         catch(Error){
-            return response.status(400).json({Error: 'User not founded in system'})
+            return response.status(400).json({Error: Error.message})
         }
     }
 }

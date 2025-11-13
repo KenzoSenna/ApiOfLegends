@@ -2,6 +2,7 @@ import vine from '@vinejs/vine'
 
 export const createCharacterValidator = vine.compile(
     vine.object({
+        image_url: vine.string().trim(),
         name: vine.string().trim(),
         region: vine.string().trim(),
         resource: vine.string().trim(),
