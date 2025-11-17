@@ -20,7 +20,7 @@ export default class CharactersController {
 
     async show({params, response}: HttpContext){
         try{
-            const character = await Character.findBy('id', params.id)
+            const character = await Character.findBy('name', params.name)
             if (!character){
                 throw new Error("This Character doesn't exists!")
             }

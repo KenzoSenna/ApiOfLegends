@@ -20,10 +20,11 @@ async function checkGuess() {
     const cardsDiv = document.getElementById("cards");
     const resultDiv = document.getElementById("result");
     const hintsDiv = document.getElementById("hints");
-
+    const checkGuess = fetch("http://localhost://characters/")
     if (!randomChampion) return;
 
     const championName = randomChampion.name.toLowerCase();
+    
     if (guess === championName) {
         cardsDiv
         .innerHTML = `<div class="card">
@@ -38,8 +39,11 @@ async function checkGuess() {
         resultDiv.textContent = "✓ Correct!";
         hintsDiv.textContent = `Region: ${randomChampion.region} | Resource: ${randomChampion.resource} | Year: ${randomChampion.year} | Type: ${randomChampion.type}`;
     } else {
-        resultDiv.className = "result incorrect";
-        cardsDiv.innerHTML = ``;
+        resultDiv.className = `${guess}`;
+        // if (guess.region === randomChampion.region)
+        cardsDiv.innerHTML = `
+        
+        `;
         resultDiv.textContent = "✗ Wrong! Try again.";
 
         hintsDiv.textContent = `Hint: Year ${randomChampion.year} | Region: ${randomChampion.region}`;
