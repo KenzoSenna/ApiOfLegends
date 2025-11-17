@@ -16,18 +16,35 @@ async function fetchData() {
 }
 
 async function checkGuess() {
+    // Guess vai ser obtido de dentro do html, quando o usuário inserir o nome do personagem dele.
     const guess = document.getElementById("guessInput").value.toLowerCase();
+
+    // Cards DEVEM ser SEMPRE acionadas, idependente de acerto ou de erro.
+    // É através dos cards que o usuário deve chegar a resposta final.
+    // Pois com os cards, é revelado ao usuário o quanto falta para ele acertar o todo.
     const cardsDiv = document.getElementById("cards");
+
+    // Div teste só para funcionar como contexto visual de acerto ou erro. Deve ser repensada antes de finalmente
+    // Ser enviada para develop
     const resultDiv = document.getElementById("result");
+
+    // Hints (Dicas)
+    // Eu realmente to pensando sobre como implementar ou SE realmente vale a pena implementar um sistema de dicas.
     const hintsDiv = document.getElementById("hints");
-    const checkGuess = fetch("http://localhost://characters/")
+
+    // minha tentativa falha de puxar o personagem digitado no guess dando fetch no nome da guess. mas precisa de uma validação melhor
+    const checkGuess = fetch(`http://localhost://characters/${guess}`)
+
+    // Se o campeão aleatório não existir
     if (!randomChampion) return;
 
+    // Pega o nome do campeão aleatório e o deriva a uma variável com letras minúsculas, evitar erro de camel case do user.
     const championName = randomChampion.name.toLowerCase();
-    
+
+    // Laço de acerto, só entra quando o usuário acerta.
     if (guess === championName) {
         cardsDiv
-        .innerHTML = `<div class="card">
+            .innerHTML = `<div class="card">
                         <img src="${randomChampion.imageUrl}" alt="${randomChampion.name}">
                         <h3>${randomChampion.name}</h3>
                         <p>Region: ${randomChampion.region}</p>

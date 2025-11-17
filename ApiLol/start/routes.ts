@@ -12,6 +12,6 @@ import router from '@adonisjs/core/services/router'
 
 // import { middleware } from './kernel.js'
 
-router.resource('user', UsersController).apiOnly()
-router.resource('characters', CharactersController).apiOnly()
-router.on('/').render("homepage")
+router.resource('user', UsersController).apiOnly() // todos os métodos de crud pra user
+router.resource('characters', CharactersController).apiOnly() // todos os métodos de crud pra chars
+router.on('/').render("homepage") // Sempre que rodar o server, já vai bater de cara com a pagininha
