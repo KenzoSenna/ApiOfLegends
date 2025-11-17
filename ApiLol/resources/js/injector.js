@@ -4,7 +4,7 @@ fetchData();
 
 async function fetchData() {
     try {
-        const response = await fetch("http://localhost:63546/characters/");
+        const response = await fetch("http://localhost:58681/characters/");
         if (!response.ok) throw new Error("Couldn't fetch data");
         const data = await response.json();
         randomChampion = data[Math.floor(Math.random() * data.length)];
