@@ -9,8 +9,8 @@ async function fetchData() {
         const data = await response.json();
         randomChampion = data[Math.floor(Math.random() * data.length)];
         console.log(randomChampion);
-        
-        
+
+
     } catch (error) {
         console.error(error);
     }
@@ -19,8 +19,8 @@ async function fetchData() {
 async function checkGuess() {
     // Guess vai ser obtido de dentro do html, quando o usuário inserir o nome do personagem dele.
     const guess = document.getElementById("guessInput").value.toLowerCase();
-    
-    
+
+
     // Cards DEVEM ser SEMPRE acionadas, idependente de acerto ou de erro.
     // É através dos cards que o usuário deve chegar a resposta final.
     // Pois com os cards, é revelado ao usuário o quanto falta para ele acertar o todo.
@@ -33,7 +33,7 @@ async function checkGuess() {
     // Hints (Dicas)
     // Eu realmente to pensando sobre como implementar ou SE realmente vale a pena implementar um sistema de dicas.
     const hintsDiv = document.getElementById("hints");
-    
+
     // minha tentativa falha de puxar o personagem digitado no guess dando fetch no nome da guess. mas precisa de uma validação melhor
     const checkGuess = fetch(`http://localhost://characters/${guess}`)
     const guessData = await checkGuess.json();
@@ -62,6 +62,8 @@ async function checkGuess() {
         resultDiv.className = "result correct";
         resultDiv.textContent = "✓ Correct!";
         hintsDiv.textContent = `Region: ${randomChampion.region} | Resource: ${randomChampion.resource} | Year: ${randomChampion.year} | Type: ${randomChampion.type}`;
+        // Quando o usuário erra, ele cai no else e através dele os cards do erro respectivo
+        // Passa a ser vermelho e mostrar o que foi que o usuário errou
     } else {
         resultDiv.className = `${guess}`;
         // if (guess.region === randomChampion.region)
@@ -71,9 +73,9 @@ async function checkGuess() {
                 <h3>Region: ${(await checkGuess).region}</h3>
             </div>
             `;
-            
+
         }
-        else{
+        else {
             cardsDiv.innerHTML += `
                 <div class="card wrong>
                     <h3>Region: ${checkGuess.region}</h3>
@@ -87,7 +89,14 @@ async function checkGuess() {
             </div>
             `;
         }
-        if (checkGuess.year === randomChampion.year){
+        else{
+            cardsDiv.innerHTML += `
+                <div class="card wrong">
+                    <h3>Resource: ${(await checkGuess).resource}</h3>
+                </div>
+            `
+        }
+        if (checkGuess.year === randomChampion.year) {
             cardsDiv.innerHTML += `
             <div class="card correct">
                 <h3>Year: ${(await checkGuess).year}</h3>
@@ -95,40 +104,39 @@ async function checkGuess() {
             `
         }
         else {
-            if (randomChampion.year > checkGuess.year){
-            cardsDiv.innerHTML +=
-            `
+            if (randomChampion.year > checkGuess.year) {
+                cardsDiv.innerHTML +=
+                    `
             <div class="card wrong">
                 <h3>Year: ↑${checkGuess.year}
             </div>
             `
-
             }
-            else{
-            cardsDiv.innerHTML +=
-            `
+            else {
+                cardsDiv.innerHTML +=
+                    `
             <div class="card wrong">
                 <h3>Year: ↓${checkGuess.year}
             </div>
-            `   
+            `
             }
-            
+
         }
-        if (checkGuess.type === randomChampion.type){
+        if (checkGuess.type === randomChampion.type) {
             cardsDiv.innerHTML += `
             <div class="card correct">
                 <h3>Type: ${(await checkGuess).type}</h3>
             </div>
             `
         }
-        else{
+        else {
             cardsDiv.innerHTML += `
             <div class="card wrong">
                 <h3>Type: ${(await checkGuess).type}
             </div>
             `
         }
-        
+
         resultDiv.textContent = "✗ Wrong! Try again.";
 
         hintsDiv.textContent = `Hint: Year ${randomChampion.year} | Region: ${randomChampion.region}`;
