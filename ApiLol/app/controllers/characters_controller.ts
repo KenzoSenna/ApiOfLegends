@@ -8,6 +8,7 @@ import type { HttpContext } from "@adonisjs/core/http";
 export default class CharactersController {
 
     async index(){
+        // Vai pegar todos os personagens, mas acredito eu que só vamos usar isso pra debugar. Pois de nada faz sentido possuir uma função dessas
         const characters = await Character.query()
         return characters
     }
@@ -20,7 +21,7 @@ export default class CharactersController {
 
     async show({params, response}: HttpContext){
         try{
-            const character = await Character.findBy('id', params.id)
+            const character = await Character.findBy('name', params.name) // quero tentar (sem dropdown no html)Validar o digitado pelo usuário
             if (!character){
                 throw new Error("This Character doesn't exists!")
             }
@@ -33,6 +34,7 @@ export default class CharactersController {
     }
 
     async update({params, request, response}: HttpContext){
+        // vamos usar esse método para atualizar os champions que sofrerem atualização de lore ou coisas do tipo
         try{
             const character = await Character.findBy('id', params.id)
             if (!character){
@@ -49,6 +51,7 @@ export default class CharactersController {
     }
 
     async destroy({params, response}: HttpContext){
+        // Destroi completamente um personagem da existência do banco de dados. Raramente vamos utilizar fora do develop
         try{
             const character = await Character.findBy('id', params.id)
             if(!character){

@@ -53,4 +53,7 @@ body {
         .correct { background: #28a745; color: white; }
         .incorrect { background: #dc3545; color: white; }
         .hints { margin-top: 15px; font-size: 12px; }
+        .wrong{
+            background-color: #ff4d4d;
+        }
         

@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loldle - Guess the Champion</title>
-    <link rel="stylesheet" href="http://localhost:5173/resources/css/style.css">
 
-@vite([
-'resources/js/injector.js', 
-'resources/css/style.css',
-])
+    @vite([
+    'resources/js/injector.js',
+    'resources/css/style.css',
+    ])
 
 </head>
+
 <body>
     <div class="container">
         <h1>Loldle</h1>
+        <a href="leaderboard.edge">Know our leaderboard</a>
         <input type="text" id="guessInput" placeholder="Guess the champion..." autocomplete="off">
         <button onclick="checkGuess()">Submit</button>
         <div id="cards"></div>
@@ -43,12 +44,9 @@
                 console.error(Error)
             }
             
-
-
         }
-
-
 
     </script> -->
 </body>
+
 </html>
