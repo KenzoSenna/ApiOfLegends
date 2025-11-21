@@ -141,4 +141,5 @@ async function checkGuess() {
 
         hintsDiv.textContent = `Hint: Year ${randomChampion.year} | Region: ${randomChampion.region}`;
     }
+    
 }
