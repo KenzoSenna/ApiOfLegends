@@ -1,5 +1,6 @@
 let randomChampion = null;
 let checkGuessChecker = null
+
 fetchData();
 
 async function fetchData() {
@@ -9,7 +10,6 @@ async function fetchData() {
         const data = await response.json();
         randomChampion = data[Math.floor(Math.random() * data.length)];
         console.log(randomChampion);
-
 
     } catch (error) {
         console.error(error);
@@ -141,5 +141,4 @@ async function checkGuess() {
 
         hintsDiv.textContent = `Hint: Year ${randomChampion.year} | Region: ${randomChampion.region}`;
     }
-    
 }
